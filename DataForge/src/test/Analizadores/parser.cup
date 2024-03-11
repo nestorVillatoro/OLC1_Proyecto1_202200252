@@ -15,15 +15,17 @@ parser code
         Error_ miError = new Error_(s.left,s.right,s.value.toString(),false);
         Editor.lista_errores.add(miError);    
 }
+
+
 :}
 
 terminal String CHAR, DOUBLE, VAR, END, IGUALDAD, ARR, ARROBA, CORCHETEIZ, EJEX, EJEY, TITULOX, TITULOY;
-terminal String CORCHETEDE, SUM, RES, MUL, DIV, MOD, PARENTESISIZ, PARENTESISDE, COMA, GRAPHLINE;
+terminal String CORCHETEDE, SUM, RES, MUL, DIV, MOD, PARENTESISIZ, PARENTESISDE, COMA, GRAPHLINE, HISTOGRAMA;
 terminal String MEDIA, MEDIANA, MODA, VARIANZA, MAX, MIN, CONSOLE, PRINT, COLUMN, IGUAL, PUNTOCOMA, DOSPUNTOS;
 terminal String DECIMAL, CARACTERES, CHARCOMILLAS, PROGRAM, ENDPROGRAM, GRAPHPIE, LABEL, VALUES, TITULO, EXEC;
 
 non terminal declararVariable, declararDouble, declararChar, inicializarPrograma, codigo, comandos;
-non terminal declararArreglos, listaArreglosDouble, listaArreglosChar;
+non terminal declararArreglos, listaArreglosDouble, listaArreglosChar, declararGraficaHistograma;
 non terminal declararAritmetica, declararEstadisticas, declararPrint, declararGraficaPie, declararGraficaLine;
 
 inicializarPrograma ::= PROGRAM codigo ENDPROGRAM;
@@ -37,9 +39,10 @@ comandos ::= declararVariable
             | declararEstadisticas
             | declararPrint
             | declararGraficaPie
+            | declararGraficaHistograma
             | declararGraficaLine;
 
-declararVariable ::= VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD declararDouble END PUNTOCOMA
+declararVariable ::= VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD declararDouble END PUNTOCOMA 
                     | VAR DOSPUNTOS CHAR DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD declararChar END PUNTOCOMA;
 
 declararDouble ::= DECIMAL
@@ -89,5 +92,9 @@ TITULOY DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS END PUNTOCOMA
 EXEC GRAPHLINE END PUNTOCOMA
 PARENTESISDE END PUNTOCOMA;
 
-
+declararGraficaHistograma ::= HISTOGRAMA PARENTESISIZ 
+TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS END PUNTOCOMA
+VALUES DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar CORCHETEDE END PUNTOCOMA 
+EXEC HISTOGRAMA END PUNTOCOMA
+PARENTESISDE END PUNTOCOMA;
                    

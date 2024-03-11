@@ -24,7 +24,7 @@ import static dataforge.Editor.lista_errores;
 WHITE = [ \r\t\n]+
 DECIMAL = [0-9]+(\.[0-9]+)?
 CARACTERES = [a-zA-Z0-9_]+
-CHARCOMILLAS = (\")([a-zA-Z0-9_]+)(\")
+CHARCOMILLAS = (\")([a-zA-Z0-9_ ]+)(\")
 
 corcheteiz = "\["
 corchetede = "\]"
@@ -239,6 +239,11 @@ return new Symbol(sym.TITULOY,yyline,yycolumn, yytext());
 "graphLine" {
 System.out.println("graphLine"); 
 return new Symbol(sym.GRAPHLINE,yyline,yycolumn, yytext());
+}
+
+"Histograma" {
+System.out.println("Histograma"); 
+return new Symbol(sym.HISTOGRAMA,yyline,yycolumn, yytext());
 }
 
 

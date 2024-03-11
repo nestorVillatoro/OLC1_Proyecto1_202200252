@@ -8,47 +8,53 @@ package test.analizadores;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int DOSPUNTOS = 30;
+  public static final int DOSPUNTOS = 36;
   public static final int CHAR = 2;
-  public static final int RES = 12;
+  public static final int RES = 16;
   public static final int CORCHETEIZ = 9;
-  public static final int GRAPHPIE = 36;
+  public static final int GRAPHPIE = 42;
   public static final int DOUBLE = 3;
-  public static final int CARACTERES = 32;
-  public static final int PUNTOCOMA = 29;
-  public static final int IGUAL = 28;
-  public static final int COLUMN = 27;
+  public static final int CARACTERES = 38;
+  public static final int PUNTOCOMA = 35;
+  public static final int TITULOY = 13;
+  public static final int TITULOX = 12;
+  public static final int EJEY = 11;
+  public static final int EJEX = 10;
+  public static final int IGUAL = 34;
+  public static final int COLUMN = 33;
   public static final int IGUALDAD = 6;
   public static final int ARROBA = 8;
-  public static final int TITULO = 39;
-  public static final int DIV = 14;
-  public static final int ENDPROGRAM = 35;
-  public static final int MIN = 24;
-  public static final int CHARCOMILLAS = 33;
-  public static final int MEDIANA = 20;
+  public static final int TITULO = 45;
+  public static final int DIV = 18;
+  public static final int ENDPROGRAM = 41;
+  public static final int HISTOGRAMA = 24;
+  public static final int MIN = 30;
+  public static final int CHARCOMILLAS = 39;
+  public static final int MEDIANA = 26;
+  public static final int DECIMAL = 37;
   public static final int EOF = 0;
-  public static final int DECIMAL = 31;
+  public static final int PROGRAM = 40;
   public static final int error = 1;
-  public static final int PROGRAM = 34;
-  public static final int MUL = 13;
-  public static final int COMA = 18;
-  public static final int PARENTESISDE = 17;
-  public static final int VALUES = 38;
-  public static final int MODA = 21;
-  public static final int MOD = 15;
-  public static final int PARENTESISIZ = 16;
-  public static final int VARIANZA = 22;
+  public static final int MUL = 17;
+  public static final int COMA = 22;
+  public static final int PARENTESISDE = 21;
+  public static final int VALUES = 44;
+  public static final int MODA = 27;
+  public static final int MOD = 19;
+  public static final int PARENTESISIZ = 20;
+  public static final int VARIANZA = 28;
   public static final int END = 5;
-  public static final int SUM = 11;
+  public static final int SUM = 15;
   public static final int ARR = 7;
-  public static final int MEDIA = 19;
-  public static final int EXEC = 40;
-  public static final int LABEL = 37;
-  public static final int MAX = 23;
+  public static final int MEDIA = 25;
+  public static final int EXEC = 46;
+  public static final int LABEL = 43;
+  public static final int MAX = 29;
   public static final int VAR = 4;
-  public static final int PRINT = 26;
-  public static final int CONSOLE = 25;
-  public static final int CORCHETEDE = 10;
+  public static final int GRAPHLINE = 23;
+  public static final int PRINT = 32;
+  public static final int CONSOLE = 31;
+  public static final int CORCHETEDE = 14;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -60,6 +66,10 @@ public class sym {
   "ARR",
   "ARROBA",
   "CORCHETEIZ",
+  "EJEX",
+  "EJEY",
+  "TITULOX",
+  "TITULOY",
   "CORCHETEDE",
   "SUM",
   "RES",
@@ -69,6 +79,8 @@ public class sym {
   "PARENTESISIZ",
   "PARENTESISDE",
   "COMA",
+  "GRAPHLINE",
+  "HISTOGRAMA",
   "MEDIA",
   "MEDIANA",
   "MODA",

@@ -17,6 +17,7 @@ public class graphPie {
         // Crear el gráfico de pastel
         JFreeChart chart = createPieChart(elementos, datos, tituloGrafica);
 
+        //ruta de la imagen
         String rutaArchivo = "C:\\Users\\nyavi\\Desktop\\quinto semestre\\compi\\lab\\OLC1_Proyecto1_202200252\\DataForge\\src\\dataforge\\graficas\\grafica_pastel.jpg";
         File archivo = new File(rutaArchivo);
 
