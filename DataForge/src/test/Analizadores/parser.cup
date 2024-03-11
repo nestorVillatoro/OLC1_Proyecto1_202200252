@@ -1,0 +1,93 @@
+package test.analizadores;
+import Errores.Error_;
+import dataforge.Editor;
+import java_cup.runtime.*;
+
+parser code 
+{:
+    public void syntax_error(Symbol s){
+        //System.out.println("Error sintáctico: "+s.value+" linea: "+s.left+" columna: "+s.right);
+        Error_ miError = new Error_(s.left,s.right,s.value.toString(),false);
+        Editor.lista_errores.add(miError);
+}
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+       // System.out.println("Error sintáctico unrecovered: "+s.value+" linea: "+s.left+" columna: "+s.right);
+        Error_ miError = new Error_(s.left,s.right,s.value.toString(),false);
+        Editor.lista_errores.add(miError);    
+}
+:}
+
+terminal String CHAR, DOUBLE, VAR, END, IGUALDAD, ARR, ARROBA, CORCHETEIZ, EJEX, EJEY, TITULOX, TITULOY;
+terminal String CORCHETEDE, SUM, RES, MUL, DIV, MOD, PARENTESISIZ, PARENTESISDE, COMA, GRAPHLINE;
+terminal String MEDIA, MEDIANA, MODA, VARIANZA, MAX, MIN, CONSOLE, PRINT, COLUMN, IGUAL, PUNTOCOMA, DOSPUNTOS;
+terminal String DECIMAL, CARACTERES, CHARCOMILLAS, PROGRAM, ENDPROGRAM, GRAPHPIE, LABEL, VALUES, TITULO, EXEC;
+
+non terminal declararVariable, declararDouble, declararChar, inicializarPrograma, codigo, comandos;
+non terminal declararArreglos, listaArreglosDouble, listaArreglosChar;
+non terminal declararAritmetica, declararEstadisticas, declararPrint, declararGraficaPie, declararGraficaLine;
+
+inicializarPrograma ::= PROGRAM codigo ENDPROGRAM;
+
+codigo ::= comandos
+        | codigo comandos;
+
+comandos ::= declararVariable
+            | declararArreglos
+            | declararAritmetica
+            | declararEstadisticas
+            | declararPrint
+            | declararGraficaPie
+            | declararGraficaLine;
+
+declararVariable ::= VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD declararDouble END PUNTOCOMA
+                    | VAR DOSPUNTOS CHAR DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD declararChar END PUNTOCOMA;
+
+declararDouble ::= DECIMAL
+                    |CARACTERES;
+
+declararChar ::= CARACTERES
+                   |CHARCOMILLAS;
+
+
+declararArreglos ::= ARR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS ARROBA CARACTERES IGUALDAD CORCHETEIZ listaArreglosDouble CORCHETEDE END PUNTOCOMA
+                    | ARR DOSPUNTOS CHAR DOSPUNTOS DOSPUNTOS ARROBA CARACTERES IGUALDAD CORCHETEIZ listaArreglosChar CORCHETEDE END PUNTOCOMA;
+
+listaArreglosDouble ::= listaArreglosDouble COMA declararDouble 
+                    | declararDouble;
+
+listaArreglosChar ::= listaArreglosChar COMA declararChar
+                    | declararChar;
+
+declararAritmetica ::= VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD SUM PARENTESISIZ declararDouble COMA declararDouble PARENTESISDE END PUNTOCOMA
+                    | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD RES PARENTESISIZ declararDouble COMA declararDouble PARENTESISDE END PUNTOCOMA
+                    | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD MUL PARENTESISIZ declararDouble COMA declararDouble PARENTESISDE END PUNTOCOMA
+                    | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD DIV PARENTESISIZ declararDouble COMA declararDouble PARENTESISDE END PUNTOCOMA
+                    | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD MOD PARENTESISIZ declararDouble COMA declararDouble PARENTESISDE END PUNTOCOMA;
+
+declararEstadisticas ::= VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD MEDIA PARENTESISIZ CORCHETEIZ listaArreglosDouble CORCHETEDE PARENTESISDE END PUNTOCOMA
+                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD MEDIANA PARENTESISIZ CORCHETEIZ listaArreglosDouble CORCHETEDE PARENTESISDE END PUNTOCOMA
+                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD MODA PARENTESISIZ CORCHETEIZ listaArreglosDouble CORCHETEDE PARENTESISDE END PUNTOCOMA
+                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD VARIANZA PARENTESISIZ CORCHETEIZ listaArreglosDouble CORCHETEDE PARENTESISDE END PUNTOCOMA
+                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD MAX PARENTESISIZ CORCHETEIZ listaArreglosDouble CORCHETEDE PARENTESISDE END PUNTOCOMA
+                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD MIN PARENTESISIZ CORCHETEIZ listaArreglosDouble CORCHETEDE PARENTESISDE END PUNTOCOMA;
+
+declararPrint ::= CONSOLE DOSPUNTOS DOSPUNTOS PRINT IGUAL listaArreglosChar END PUNTOCOMA;
+
+declararGraficaPie ::= GRAPHPIE PARENTESISIZ 
+LABEL DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar CORCHETEDE END PUNTOCOMA
+VALUES DOSPUNTOS DOSPUNTOS DOUBLE IGUAL CORCHETEIZ listaArreglosDouble CORCHETEDE END PUNTOCOMA
+TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS END PUNTOCOMA
+EXEC GRAPHPIE END PUNTOCOMA 
+PARENTESISDE END PUNTOCOMA;
+
+declararGraficaLine ::= GRAPHLINE PARENTESISIZ
+TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS END PUNTOCOMA
+EJEX DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar CORCHETEDE END PUNTOCOMA
+EJEY DOSPUNTOS DOSPUNTOS DOUBLE IGUAL CORCHETEIZ listaArreglosDouble CORCHETEDE END PUNTOCOMA
+TITULOX DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS END PUNTOCOMA
+TITULOY DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS END PUNTOCOMA
+EXEC GRAPHLINE END PUNTOCOMA
+PARENTESISDE END PUNTOCOMA;
+
+
+                   
