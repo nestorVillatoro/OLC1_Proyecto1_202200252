@@ -15,7 +15,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 public class graphLine {
     public static String nombreIMGLine;
     public static int idIMGLine = 0;
-    public static void main(String[] args) {
+    public void generarGrafica() {
         
         for(int i = 0; i < 3; i++){
         // Datos de ejemplo (puedes reemplazarlos con tus propios datos)

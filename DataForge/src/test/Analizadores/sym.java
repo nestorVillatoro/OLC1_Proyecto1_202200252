@@ -8,57 +8,54 @@ package test.analizadores;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int DOSPUNTOS = 39;
+  public static final int DOSPUNTOS = 37;
   public static final int CHAR = 2;
-  public static final int RES = 18;
+  public static final int RES = 17;
   public static final int CORCHETEIZ = 9;
-  public static final int GRAPHPIE = 46;
+  public static final int GRAPHPIE = 43;
   public static final int DOUBLE = 3;
-  public static final int CARACTERES = 42;
-  public static final int PUNTOCOMA = 38;
+  public static final int CARACTERES = 39;
+  public static final int PUNTOCOMA = 36;
+  public static final int GRAPHBAR = 14;
   public static final int TITULOY = 13;
   public static final int TITULOX = 12;
   public static final int EJEY = 11;
-  public static final int IGUAL = 37;
+  public static final int IGUAL = 35;
   public static final int EJEX = 10;
-  public static final int COLUMN = 36;
+  public static final int COLUMN = 34;
   public static final int IGUALDAD = 6;
   public static final int ARROBA = 8;
-  public static final int TITULO = 49;
-  public static final int DIV = 20;
-  public static final int ENDPROGRAM = 45;
-  public static final int HISTOGRAMA = 26;
-  public static final int MIN = 33;
-  public static final int CHARCOMILLAS = 43;
-  public static final int MEDIANA = 29;
-  public static final int DECIMAL = 41;
+  public static final int TITULO = 46;
+  public static final int DIV = 19;
+  public static final int ENDPROGRAM = 42;
+  public static final int HISTOGRAMA = 25;
+  public static final int MIN = 31;
+  public static final int CHARCOMILLAS = 40;
+  public static final int MEDIANA = 27;
+  public static final int DECIMAL = 38;
   public static final int EOF = 0;
-  public static final int PROGRAM = 44;
+  public static final int PROGRAM = 41;
   public static final int error = 1;
-  public static final int MUL = 19;
-  public static final int COMA = 24;
-  public static final int PARENTESISDE = 23;
-  public static final int VALUES = 48;
-  public static final int COMENTARIO = 40;
-  public static final int MODA = 30;
-  public static final int MOD = 21;
-  public static final int CIERRACOM = 15;
-  public static final int PARENTESISIZ = 22;
-  public static final int CARACTERESCOM = 27;
-  public static final int ABRECOM = 14;
-  public static final int VARIANZA = 31;
+  public static final int MUL = 18;
+  public static final int COMA = 23;
+  public static final int PARENTESISDE = 22;
+  public static final int VALUES = 45;
+  public static final int MODA = 28;
+  public static final int MOD = 20;
+  public static final int PARENTESISIZ = 21;
+  public static final int VARIANZA = 29;
   public static final int END = 5;
-  public static final int SUM = 17;
+  public static final int SUM = 16;
   public static final int ARR = 7;
-  public static final int MEDIA = 28;
-  public static final int EXEC = 50;
-  public static final int LABEL = 47;
-  public static final int MAX = 32;
+  public static final int MEDIA = 26;
+  public static final int EXEC = 47;
+  public static final int LABEL = 44;
+  public static final int MAX = 30;
   public static final int VAR = 4;
-  public static final int GRAPHLINE = 25;
-  public static final int PRINT = 35;
-  public static final int CONSOLE = 34;
-  public static final int CORCHETEDE = 16;
+  public static final int GRAPHLINE = 24;
+  public static final int PRINT = 33;
+  public static final int CONSOLE = 32;
+  public static final int CORCHETEDE = 15;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -74,8 +71,7 @@ public class sym {
   "EJEY",
   "TITULOX",
   "TITULOY",
-  "ABRECOM",
-  "CIERRACOM",
+  "GRAPHBAR",
   "CORCHETEDE",
   "SUM",
   "RES",
@@ -87,7 +83,6 @@ public class sym {
   "COMA",
   "GRAPHLINE",
   "HISTOGRAMA",
-  "CARACTERESCOM",
   "MEDIA",
   "MEDIANA",
   "MODA",
@@ -100,7 +95,6 @@ public class sym {
   "IGUAL",
   "PUNTOCOMA",
   "DOSPUNTOS",
-  "COMENTARIO",
   "DECIMAL",
   "CARACTERES",
   "CHARCOMILLAS",

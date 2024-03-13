@@ -7,8 +7,10 @@ package dataforge;
 import Errores.Error_;
 import Errores.Tokens_;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.StringReader;
 import java.util.LinkedList;
 import javax.swing.JFileChooser;
@@ -25,7 +27,7 @@ import test.analizadores.Scanner;
 public class Editor extends javax.swing.JFrame {
     
     public static LinkedList<Error_> lista_errores = new LinkedList<Error_>();
-    
+    public File archivo;
     public static LinkedList<Tokens_> lista_tokens = new LinkedList<Tokens_>();
 
     /**
@@ -110,6 +112,11 @@ public class Editor extends javax.swing.JFrame {
         jMenu2.add(jMenuItem2);
 
         jMenuItem3.setText("Guardar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
@@ -167,16 +174,16 @@ public class Editor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 510, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 516, Short.MAX_VALUE)
                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -214,6 +221,33 @@ public class Editor extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos DataForge (*.df)", "df");
+            fileChooser.setFileFilter(filter);
+
+            int result = fileChooser.showSaveDialog(this);
+
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File archivoSeleccionado = fileChooser.getSelectedFile();
+                String nombreArchivo = archivoSeleccionado.getName();
+                if (!nombreArchivo.toLowerCase().endsWith(".df")) {
+                    archivoSeleccionado = new File(archivoSeleccionado.getParentFile(), nombreArchivo + ".df");
+                }
+
+                String txtSave = jTextArea1.getText();
+                
+                try {
+                    FileWriter fw = new FileWriter(archivoSeleccionado);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    bw.write(txtSave);
+                    bw.close();
+                     JOptionPane.showMessageDialog(null, "Archivo guardado!");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+               
+            }
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -224,7 +258,7 @@ public class Editor extends javax.swing.JFrame {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos .df", "df");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(frame);
-        File archivo = chooser.getSelectedFile();
+        archivo = chooser.getSelectedFile();
         if (archivo != null) {
             try {
                 FileReader fr = new FileReader(archivo);
@@ -237,7 +271,7 @@ public class Editor extends javax.swing.JFrame {
                 }
                 
                 jTextArea1.setText(texto);
-                JOptionPane.showMessageDialog(null, "Archivo leido correctamente");
+                JOptionPane.showMessageDialog(null, "Archivo leido!");
 
             } catch (Exception e) {
 
@@ -247,6 +281,8 @@ public class Editor extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
+        
+        jTextArea2.setText("");
         
         String rutaCarpeta = "C:\\Users\\nyavi\\Desktop\\quinto semestre\\compi\\lab\\OLC1_Proyecto1_202200252\\DataForge\\src\\dataforge\\graficas"; 
         File carpeta = new File(rutaCarpeta);
@@ -287,6 +323,9 @@ public class Editor extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
+        jTextArea2.setText("ABRIMOS COSAS");
+        String textoConsola = Parser.STR.toString();
+        jTextArea2.setText(textoConsola);
         
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
@@ -301,6 +340,20 @@ public class Editor extends javax.swing.JFrame {
         reporteTokens newframe = new reporteTokens();
         newframe.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+            try {
+                FileWriter fw = new FileWriter(archivo);
+                fw.write(jTextArea1.getText());
+                fw.close();
+                JOptionPane.showMessageDialog(null, "Archivo guardado!");
+              
+                        
+            } catch (Exception e) {
+            }
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments

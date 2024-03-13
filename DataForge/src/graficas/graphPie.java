@@ -7,26 +7,26 @@ import org.jfree.chart.ChartUtilities;
 
 import java.io.File;
 import java.io.IOException;
+import static test.analizadores.Parser.atributospie;
+import java.util.ArrayList;
 
 public class graphPie {
     public static String nombreIMGPie;
     public static int idIMGPie = 0;
-    public static void main(String[] args) {
+    public void generarGrafica() {
         
-        for(int i = 0; i < 3; i++){
-        // Datos de ejemplo (puedes reemplazarlos con tus propios datos)
-        String[] elementos = {"Manzanas", "Plátanos", "Peras", "Uvas"};
-        double[] datos = {30, 20, 15, 35};
-        String tituloGrafica = "Distribución de Frutas";
+        ArrayList<Object> elementos = atributospie.get(0).getLabel();
+        ArrayList<Object> datos = atributospie.get(0).getValues();
+        String tituloGrafica = atributospie.get(0).getTitulo();
 
         // Crear el gráfico de pastel
         String UbicacionDelPie = createPieChart(elementos, datos, tituloGrafica);
         System.out.println(UbicacionDelPie);
-        }
+        
     }
 
 
-    private static String createPieChart(String[] elementos, double[] datos, String titulo) {
+    private static String createPieChart(ArrayList<Object>elementos, ArrayList<Object> datos, String titulo) {
         
         String xPie;
         idIMGPie = idIMGPie + 1;
@@ -35,8 +35,8 @@ public class graphPie {
         nombreIMGPie = "grafica_pastel" + xPie + ".jpg";
         
         DefaultPieDataset dataset = new DefaultPieDataset();
-        for (int i = 0; i < elementos.length; i++) {
-            dataset.setValue(elementos[i], datos[i]);
+        for (int i = 0; i < elementos.size(); i++) {
+            dataset.setValue(elementos.get(i).toString(), (Number) datos.get(i));
         }
         
         JFreeChart chart = ChartFactory.createPieChart(titulo, dataset, true, true, false);

@@ -347,6 +347,13 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.HISTOGRAMA,yyline,yycolumn, yytext());
 }
 
+"graphBar" {
+System.out.println("graphBar");
+Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
+lista_tokens.add(nuevoToken); 
+return new Symbol(sym.GRAPHBAR,yyline,yycolumn, yytext());
+}
+
 
 
 

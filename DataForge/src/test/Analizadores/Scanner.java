@@ -119,14 +119,14 @@ public class Scanner implements java_cup.runtime.Scanner {
     "\1\0\1\14\1\0\2\14\2\0\2\14\1\0\1\14"+
     "\1\0\2\14\1\0\1\37\2\40\1\41\1\14\1\41"+
     "\1\14\1\0\2\14\1\0\1\42\1\43\1\14\1\0"+
-    "\1\44\1\0\3\14\1\0\1\14\1\0\1\14\2\45"+
-    "\2\46\1\14\1\0\2\47\1\0\1\14\1\0\1\14"+
+    "\1\44\1\0\4\14\1\0\1\14\1\0\1\14\2\45"+
+    "\2\46\1\14\1\0\2\47\1\0\2\14\1\0\1\14"+
     "\1\0\1\14\1\0\2\50\1\51\1\52\1\53\1\52"+
-    "\1\53\1\14\2\0\1\14\1\0\2\54\1\14\1\0"+
-    "\2\55\1\0\2\56\1\14\2\0\2\57\1\60";
+    "\1\53\1\14\2\0\1\54\1\14\1\0\2\55\1\14"+
+    "\1\0\2\56\1\0\2\57\1\14\2\0\2\60\1\61";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[195];
+    int [] result = new int[198];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -170,15 +170,15 @@ public class Scanner implements java_cup.runtime.Scanner {
     "\0\u11f8\0\u0170\0\u1226\0\u1254\0\u0170\0\u1282\0\56\0\u12b0"+
     "\0\u12de\0\u130c\0\u133a\0\u1368\0\56\0\u0170\0\u1396\0\u13c4"+
     "\0\u0170\0\u13f2\0\u1420\0\u144e\0\u147c\0\u14aa\0\u14d8\0\u1506"+
-    "\0\u1534\0\u1562\0\u1590\0\u0170\0\56\0\u15be\0\u15ec\0\u0170"+
-    "\0\56\0\u161a\0\u1648\0\u1676\0\u16a4\0\u16d2\0\u1700\0\u172e"+
-    "\0\u0170\0\56\0\u0170\0\u0170\0\u0170\0\56\0\56\0\u175c"+
-    "\0\u178a\0\u17b8\0\u17e6\0\u1814\0\u0170\0\56\0\u1842\0\u1870"+
-    "\0\u0170\0\56\0\u189e\0\u0170\0\56\0\u18cc\0\u18fa\0\u1928"+
-    "\0\u0170\0\56\0\56";
+    "\0\u1534\0\u1562\0\u1590\0\u15be\0\u0170\0\56\0\u15ec\0\u161a"+
+    "\0\u0170\0\56\0\u1648\0\u1676\0\u16a4\0\u16d2\0\u1700\0\u172e"+
+    "\0\u175c\0\u178a\0\u0170\0\56\0\u0170\0\u0170\0\u0170\0\56"+
+    "\0\56\0\u17b8\0\u17e6\0\u1814\0\u0170\0\u1842\0\u1870\0\u0170"+
+    "\0\56\0\u189e\0\u18cc\0\u0170\0\56\0\u18fa\0\u0170\0\56"+
+    "\0\u1928\0\u1956\0\u1984\0\u0170\0\56\0\56";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[195];
+    int [] result = new int[198];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -272,31 +272,33 @@ public class Scanner implements java_cup.runtime.Scanner {
     "\1\20\6\0\14\20\1\216\12\20\20\0\1\20\6\0"+
     "\12\20\1\217\14\20\41\0\1\220\34\0\1\20\6\0"+
     "\4\20\1\221\22\20\46\0\1\222\27\0\1\20\6\0"+
-    "\12\20\1\223\3\20\1\224\10\20\20\0\1\20\6\0"+
-    "\6\20\1\225\20\20\35\0\1\226\40\0\1\20\6\0"+
-    "\14\20\1\227\12\20\43\0\1\230\32\0\1\20\6\0"+
-    "\1\231\26\20\20\0\1\20\6\0\15\20\1\232\11\20"+
-    "\44\0\1\233\31\0\1\20\6\0\20\20\1\234\6\20"+
-    "\3\0\1\235\14\0\1\20\6\0\14\20\1\236\12\20"+
-    "\43\0\1\237\32\0\1\20\6\0\4\20\1\240\22\20"+
-    "\33\0\1\241\66\0\1\242\31\0\1\20\6\0\10\20"+
-    "\1\243\16\20\2\0\1\244\15\0\1\20\6\0\10\20"+
-    "\1\245\16\20\2\0\1\246\15\0\1\20\6\0\17\20"+
-    "\1\247\7\20\46\0\1\250\27\0\1\20\6\0\1\251"+
-    "\26\20\27\0\1\252\46\0\1\20\6\0\13\20\1\253"+
-    "\13\20\20\0\1\20\6\0\24\20\1\254\1\255\1\20"+
-    "\53\0\1\256\1\257\21\0\1\20\6\0\26\20\1\260"+
-    "\55\0\1\261\35\0\1\262\40\0\1\20\6\0\14\20"+
-    "\1\263\12\20\43\0\1\264\32\0\1\20\6\0\4\20"+
-    "\1\265\22\20\33\0\1\266\42\0\1\20\6\0\1\267"+
-    "\26\20\27\0\1\270\46\0\1\20\6\0\1\271\26\20"+
-    "\27\0\1\272\74\0\1\273\27\0\1\20\6\0\4\20"+
-    "\1\274\22\20\33\0\1\275\42\0\1\20\6\0\13\20"+
-    "\1\276\13\20\42\0\1\277\42\0\1\300\46\0\1\20"+
-    "\6\0\1\301\26\20\27\0\1\302\70\0\1\303\17\0";
+    "\1\20\1\223\10\20\1\224\3\20\1\225\10\20\20\0"+
+    "\1\20\6\0\6\20\1\226\20\20\35\0\1\227\40\0"+
+    "\1\20\6\0\14\20\1\230\12\20\43\0\1\231\32\0"+
+    "\1\20\6\0\1\232\26\20\20\0\1\20\6\0\15\20"+
+    "\1\233\11\20\44\0\1\234\31\0\1\20\6\0\20\20"+
+    "\1\235\6\20\3\0\1\236\14\0\1\20\6\0\14\20"+
+    "\1\237\12\20\43\0\1\240\32\0\1\20\6\0\4\20"+
+    "\1\241\22\20\33\0\1\242\66\0\1\243\31\0\1\20"+
+    "\6\0\1\244\26\20\20\0\1\20\6\0\10\20\1\245"+
+    "\16\20\2\0\1\246\15\0\1\20\6\0\10\20\1\247"+
+    "\16\20\2\0\1\250\15\0\1\20\6\0\17\20\1\251"+
+    "\7\20\46\0\1\252\27\0\1\20\6\0\1\253\26\20"+
+    "\27\0\1\254\46\0\1\20\6\0\13\20\1\255\13\20"+
+    "\20\0\1\20\6\0\24\20\1\256\1\257\1\20\53\0"+
+    "\1\260\1\261\21\0\1\20\6\0\26\20\1\262\55\0"+
+    "\1\263\35\0\1\264\40\0\1\20\6\0\17\20\1\265"+
+    "\7\20\20\0\1\20\6\0\14\20\1\266\12\20\43\0"+
+    "\1\267\32\0\1\20\6\0\4\20\1\270\22\20\33\0"+
+    "\1\271\42\0\1\20\6\0\1\272\26\20\27\0\1\273"+
+    "\46\0\1\20\6\0\1\274\26\20\27\0\1\275\74\0"+
+    "\1\276\27\0\1\20\6\0\4\20\1\277\22\20\33\0"+
+    "\1\300\42\0\1\20\6\0\13\20\1\301\13\20\42\0"+
+    "\1\302\42\0\1\303\46\0\1\20\6\0\1\304\26\20"+
+    "\27\0\1\305\70\0\1\306\17\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[6486];
+    int [] result = new int[6578];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -347,15 +349,15 @@ public class Scanner implements java_cup.runtime.Scanner {
     "\3\1\1\0\3\1\1\0\3\1\1\0\2\1\1\0"+
     "\3\1\1\0\1\1\1\0\2\1\2\0\2\1\1\0"+
     "\1\1\1\0\2\1\1\0\5\1\1\11\1\1\1\0"+
-    "\2\1\1\0\1\11\2\1\1\0\1\1\1\0\3\1"+
+    "\2\1\1\0\1\11\2\1\1\0\1\1\1\0\4\1"+
     "\1\0\1\1\1\0\4\1\1\11\1\1\1\0\1\1"+
-    "\1\11\1\0\1\1\1\0\1\1\1\0\1\1\1\0"+
-    "\1\1\1\11\3\1\2\11\1\1\2\0\1\1\1\0"+
+    "\1\11\1\0\2\1\1\0\1\1\1\0\1\1\1\0"+
+    "\1\1\1\11\3\1\2\11\1\1\2\0\2\1\1\0"+
     "\1\1\1\11\1\1\1\0\1\1\1\11\1\0\1\1"+
     "\1\11\1\1\2\0\1\1\2\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[195];
+    int [] result = new int[198];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -865,17 +867,17 @@ public class Scanner implements java_cup.runtime.Scanner {
     //System.out.println(nuevoError.toString());
             }
           // fall through
-          case 49: break;
+          case 50: break;
           case 2:
             { 
             }
           // fall through
-          case 50: break;
+          case 51: break;
           case 3:
             { System.out.println("Comentario");
             }
           // fall through
-          case 51: break;
+          case 52: break;
           case 4:
             { System.out.println("(");
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -883,7 +885,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.PARENTESISIZ,yyline,yycolumn, yytext());
             }
           // fall through
-          case 52: break;
+          case 53: break;
           case 5:
             { System.out.println(")"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -891,7 +893,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.PARENTESISDE,yyline,yycolumn, yytext());
             }
           // fall through
-          case 53: break;
+          case 54: break;
           case 6:
             { System.out.println(","); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -899,7 +901,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.COMA,yyline,yycolumn, yytext());
             }
           // fall through
-          case 54: break;
+          case 55: break;
           case 7:
             { System.out.println("algun decimal o entero"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"Double");
@@ -907,7 +909,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.DECIMAL,yyline,yycolumn, yytext());
             }
           // fall through
-          case 55: break;
+          case 56: break;
           case 8:
             { System.out.println(":"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -915,7 +917,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.DOSPUNTOS,yyline,yycolumn, yytext());
             }
           // fall through
-          case 56: break;
+          case 57: break;
           case 9:
             { System.out.println(";"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -923,7 +925,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.PUNTOCOMA,yyline,yycolumn, yytext());
             }
           // fall through
-          case 57: break;
+          case 58: break;
           case 10:
             { System.out.println("="); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -931,7 +933,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.IGUAL,yyline,yycolumn, yytext());
             }
           // fall through
-          case 58: break;
+          case 59: break;
           case 11:
             { System.out.println("@");
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -939,7 +941,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.ARROBA,yyline,yycolumn, yytext());
             }
           // fall through
-          case 59: break;
+          case 60: break;
           case 12:
             { System.out.println("algo"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"Var");
@@ -947,7 +949,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.CARACTERES,yyline,yycolumn, yytext());
             }
           // fall through
-          case 60: break;
+          case 61: break;
           case 13:
             { System.out.println("["); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -955,7 +957,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.CORCHETEIZ,yyline,yycolumn, yytext());
             }
           // fall through
-          case 61: break;
+          case 62: break;
           case 14:
             { System.out.println("]"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -963,7 +965,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.CORCHETEDE,yyline,yycolumn, yytext());
             }
           // fall through
-          case 62: break;
+          case 63: break;
           case 15:
             { System.out.println("<-");
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -971,7 +973,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.IGUALDAD,yyline,yycolumn, yytext());
             }
           // fall through
-          case 63: break;
+          case 64: break;
           case 16:
             { System.out.println("algo entre comillas"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"String");
@@ -979,7 +981,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.CHARCOMILLAS,yyline,yycolumn, yytext());
             }
           // fall through
-          case 64: break;
+          case 65: break;
           case 17:
             { System.out.println("arr");
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -987,7 +989,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.ARR,yyline,yycolumn, yytext());
             }
           // fall through
-          case 65: break;
+          case 66: break;
           case 18:
             { System.out.println("div"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -995,7 +997,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.DIV,yyline,yycolumn, yytext());
             }
           // fall through
-          case 66: break;
+          case 67: break;
           case 19:
             { System.out.println("end"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1003,7 +1005,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.END,yyline,yycolumn, yytext());
             }
           // fall through
-          case 67: break;
+          case 68: break;
           case 20:
             { System.out.println("Max"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1011,7 +1013,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.MAX,yyline,yycolumn, yytext());
             }
           // fall through
-          case 68: break;
+          case 69: break;
           case 21:
             { System.out.println("Min"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1019,7 +1021,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.MIN,yyline,yycolumn, yytext());
             }
           // fall through
-          case 69: break;
+          case 70: break;
           case 22:
             { System.out.println("mod"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1027,7 +1029,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.MOD,yyline,yycolumn, yytext());
             }
           // fall through
-          case 70: break;
+          case 71: break;
           case 23:
             { System.out.println("mul"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1035,7 +1037,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.MUL,yyline,yycolumn, yytext());
             }
           // fall through
-          case 71: break;
+          case 72: break;
           case 24:
             { System.out.println("res"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1043,7 +1045,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.RES,yyline,yycolumn, yytext());
             }
           // fall through
-          case 72: break;
+          case 73: break;
           case 25:
             { System.out.println("sum"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1051,7 +1053,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.SUM,yyline,yycolumn, yytext());
             }
           // fall through
-          case 73: break;
+          case 74: break;
           case 26:
             { System.out.println("var"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1059,7 +1061,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.VAR,yyline,yycolumn, yytext());
             }
           // fall through
-          case 74: break;
+          case 75: break;
           case 27:
             { System.out.println("ejeX"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1067,7 +1069,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.EJEX,yyline,yycolumn, yytext());
             }
           // fall through
-          case 75: break;
+          case 76: break;
           case 28:
             { System.out.println("ejeY"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1075,7 +1077,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.EJEY,yyline,yycolumn, yytext());
             }
           // fall through
-          case 76: break;
+          case 77: break;
           case 29:
             { System.out.println("EXEC"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1083,7 +1085,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.EXEC,yyline,yycolumn, yytext());
             }
           // fall through
-          case 77: break;
+          case 78: break;
           case 30:
             { System.out.println("Moda"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1091,7 +1093,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.MODA,yyline,yycolumn, yytext());
             }
           // fall through
-          case 78: break;
+          case 79: break;
           case 31:
             { System.out.println("label"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1099,7 +1101,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.LABEL,yyline,yycolumn, yytext());
             }
           // fall through
-          case 79: break;
+          case 80: break;
           case 32:
             { System.out.println("Media"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1107,7 +1109,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.MEDIA,yyline,yycolumn, yytext());
             }
           // fall through
-          case 80: break;
+          case 81: break;
           case 33:
             { System.out.println("print"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1115,7 +1117,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.PRINT,yyline,yycolumn, yytext());
             }
           // fall through
-          case 81: break;
+          case 82: break;
           case 34:
             { System.out.println("char[]"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1123,7 +1125,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.CHAR,yyline,yycolumn, yytext());
             }
           // fall through
-          case 82: break;
+          case 83: break;
           case 35:
             { System.out.println("column"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1131,7 +1133,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.COLUMN,yyline,yycolumn, yytext());
             }
           // fall through
-          case 83: break;
+          case 84: break;
           case 36:
             { System.out.println("double"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1139,7 +1141,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.DOUBLE,yyline,yycolumn, yytext());
             }
           // fall through
-          case 84: break;
+          case 85: break;
           case 37:
             { System.out.println("titulo"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1147,7 +1149,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.TITULO,yyline,yycolumn, yytext());
             }
           // fall through
-          case 85: break;
+          case 86: break;
           case 38:
             { System.out.println("values"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1155,7 +1157,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.VALUES,yyline,yycolumn, yytext());
             }
           // fall through
-          case 86: break;
+          case 87: break;
           case 39:
             { System.out.println("console"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1163,7 +1165,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.CONSOLE,yyline,yycolumn, yytext());
             }
           // fall through
-          case 87: break;
+          case 88: break;
           case 40:
             { System.out.println("Mediana"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1171,7 +1173,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.MEDIANA,yyline,yycolumn, yytext());
             }
           // fall through
-          case 88: break;
+          case 89: break;
           case 41:
             { System.out.println("PROGRAM"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1179,7 +1181,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.PROGRAM,yyline,yycolumn, yytext());
             }
           // fall through
-          case 89: break;
+          case 90: break;
           case 42:
             { System.out.println("tituloX"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1187,7 +1189,7 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.TITULOX,yyline,yycolumn, yytext());
             }
           // fall through
-          case 90: break;
+          case 91: break;
           case 43:
             { System.out.println("tituloY"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -1195,47 +1197,55 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.TITULOY,yyline,yycolumn, yytext());
             }
           // fall through
-          case 91: break;
+          case 92: break;
           case 44:
+            { System.out.println("graphBar");
+Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
+lista_tokens.add(nuevoToken); 
+return new Symbol(sym.GRAPHBAR,yyline,yycolumn, yytext());
+            }
+          // fall through
+          case 93: break;
+          case 45:
             { System.out.println("graphPie"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
 lista_tokens.add(nuevoToken);
 return new Symbol(sym.GRAPHPIE,yyline,yycolumn, yytext());
             }
           // fall through
-          case 92: break;
-          case 45:
+          case 94: break;
+          case 46:
             { System.out.println("Varianza"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
 lista_tokens.add(nuevoToken);
 return new Symbol(sym.VARIANZA,yyline,yycolumn, yytext());
             }
           // fall through
-          case 93: break;
-          case 46:
+          case 95: break;
+          case 47:
             { System.out.println("graphLine"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
 lista_tokens.add(nuevoToken);
 return new Symbol(sym.GRAPHLINE,yyline,yycolumn, yytext());
             }
           // fall through
-          case 94: break;
-          case 47:
+          case 96: break;
+          case 48:
             { System.out.println("Histograma");
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
 lista_tokens.add(nuevoToken); 
 return new Symbol(sym.HISTOGRAMA,yyline,yycolumn, yytext());
             }
           // fall through
-          case 95: break;
-          case 48:
+          case 97: break;
+          case 49:
             { System.out.println("END PROGRAM"); 
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
 lista_tokens.add(nuevoToken);
 return new Symbol(sym.ENDPROGRAM,yyline,yycolumn, yytext());
             }
           // fall through
-          case 96: break;
+          case 98: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
