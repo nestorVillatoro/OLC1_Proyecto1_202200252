@@ -3,13 +3,17 @@ package graficas;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-
+import static test.analizadores.Parser.atributoslinea;
+import static dataforge.Editor.img; 
+ 
 
 
 public class graphLine {
@@ -17,22 +21,22 @@ public class graphLine {
     public static int idIMGLine = 0;
     public void generarGrafica() {
         
-        for(int i = 0; i < 3; i++){
-        // Datos de ejemplo (puedes reemplazarlos con tus propios datos)
-        String[] elementos = {"Manzanas", "Plátanos", "Peras", "Uvas"};
-        double[] datos = {30, 20, 15, 35};
-        String tituloGrafica = "Distribución de Frutas";
-        String tituloX = "Frutas";
-        String tituloY = "Cantidad";
+        ArrayList<Object> datosx = atributoslinea.get(0).getDatosX();
+        ArrayList<Object> datosy = atributoslinea.get(0).getDatosY();
+        String titulo = atributoslinea.get(0).getTitulo();
+        String tituloX = atributoslinea.get(0).getTitulox();
+        String tituloY = atributoslinea.get(0).getTituloy();
+        
+        
         
         //creamos la gráfica
-        String UbicacionDelLine = createLineChart(elementos, datos, tituloGrafica, tituloX, tituloY);
+        String UbicacionDelLine = createLineChart(datosx, datosy, titulo, tituloX, tituloY);
         System.out.println(UbicacionDelLine);
+        img.add(new ImageIcon(UbicacionDelLine));
         
-        }
     }
     
-    private static String createLineChart(String[] elementos, double[] datos, String titulo, String tituloX, String tituloY) {
+    private static String createLineChart(ArrayList<Object> elementos, ArrayList<Object> datos, String titulo, String tituloX, String tituloY) {
         String xLine;
         idIMGLine = idIMGLine + 1;
         xLine = String.valueOf(idIMGLine);
@@ -43,9 +47,9 @@ public class graphLine {
     
     // Crear una serie de datos
     DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-    for (int i = 0; i < elementos.length; i++) {
-        dataset.addValue(datos[i], titulo, elementos[i]);
-    }
+        for (int i = 0; i < elementos.size(); i++) {
+            dataset.addValue((Number) datos.get(i), titulo, elementos.get(i).toString());
+        }
     
     // Crear el gráfico de línea
     JFreeChart chart = ChartFactory.createLineChart(titulo, tituloX, tituloY, dataset, PlotOrientation.VERTICAL, true, false, false);

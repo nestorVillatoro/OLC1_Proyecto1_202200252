@@ -108,6 +108,13 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.IGUALDAD,yyline,yycolumn, yytext());
 }
 
+"->" {
+System.out.println("->");
+Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
+lista_tokens.add(nuevoToken); 
+return new Symbol(sym.IGUALDAD2,yyline,yycolumn, yytext());
+}
+
 "arr" {
 System.out.println("arr");
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
@@ -340,8 +347,8 @@ lista_tokens.add(nuevoToken);
 return new Symbol(sym.GRAPHLINE,yyline,yycolumn, yytext());
 }
 
-"Histograma" {
-System.out.println("Histograma");
+"Histogram" {
+System.out.println("Histogram");
 Tokens_ nuevoToken = new Tokens_(yyline,yycolumn,yytext(),"id");
 lista_tokens.add(nuevoToken); 
 return new Symbol(sym.HISTOGRAMA,yyline,yycolumn, yytext());

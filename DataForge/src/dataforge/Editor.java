@@ -6,13 +6,16 @@ package dataforge;
 
 import Errores.Error_;
 import Errores.Tokens_;
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import javax.swing.ImageIcon; 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -27,8 +30,10 @@ import test.analizadores.Scanner;
 public class Editor extends javax.swing.JFrame {
     
     public static LinkedList<Error_> lista_errores = new LinkedList<Error_>();
+    public static ArrayList<ImageIcon> img = new ArrayList<ImageIcon>();
     public File archivo;
-    public static LinkedList<Tokens_> lista_tokens = new LinkedList<Tokens_>();
+    private int idImg = 0;
+    public static LinkedList<Tokens_> lista_tokens = new LinkedList<Tokens_>();  
 
     /**
      * Creates new form Editor
@@ -81,11 +86,19 @@ public class Editor extends javax.swing.JFrame {
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
-        jLabel1.setText("jLabel1");
-
         jButton3.setText("Anterior");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Siguiente");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Ver gráficas");
 
@@ -179,12 +192,13 @@ public class Editor extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 516, Short.MAX_VALUE)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(340, 340, 340)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -302,12 +316,12 @@ public class Editor extends javax.swing.JFrame {
         }
         
         
-        for (int i = 0; i < lista_errores.size(); i++) {
-            lista_errores.pop();
-        }
-        for (int i = 0; i < lista_tokens.size(); i++) {
-            lista_tokens.pop();
-        }
+        
+            lista_errores.clear();
+        
+        
+            lista_tokens.clear();
+        
         try{
             String textoAnalizar = "";
         textoAnalizar =  jTextArea1.getText();
@@ -334,7 +348,18 @@ public class Editor extends javax.swing.JFrame {
         Reportes newframe = new Reportes();
         newframe.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
-
+    
+    
+    private void mostrarimg(){
+        if(!img.isEmpty()){
+            ImageIcon actual = img.get(idImg);
+            Image redimension = actual.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon actual_redimensionada = new ImageIcon(redimension);
+            jLabel1.setIcon(actual_redimensionada);
+        
+        }
+    }    
+     
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
         reporteTokens newframe = new reporteTokens();
@@ -354,6 +379,25 @@ public class Editor extends javax.swing.JFrame {
             }
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        idImg = idImg -1 ;
+        if(idImg < 0){
+            idImg = 0;
+        }
+        mostrarimg();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        idImg = idImg +1 ;
+        if(idImg >= img.size()){
+            idImg = 0;
+        }
+        mostrarimg();
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

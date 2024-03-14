@@ -1,32 +1,39 @@
 package graficas;
 
 
+import static dataforge.Editor.img;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.ImageIcon;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import static test.analizadores.Parser.atributoshisto;
 
 public class Histograma {
     public static String nombreIMG;
     public static int idIMG = 0;
-    public static void main(String[] args) {
-        for(int i = 0; i < 3; i++){
-        String[] valores = {"2", "2", "2", "5", "5", "7", "8"};
-        String titulo = "Analisis de arreglo";
+    public void generarGrafica() {
         
-        String UbicacionDelHistograma = createHistograma(titulo, valores); 
-        System.out.println(UbicacionDelHistograma);
+        ArrayList<Object> datos = atributoshisto.get(0).getValues();
+        String titulo = atributoshisto.get(0).getTitulo();
+
         
         
-}
-    }        
+        
+        //creamos la gráfica
+        String UbicacionDeHisto = createHistograma(titulo, datos);
+        System.out.println(UbicacionDeHisto);
+        img.add(new ImageIcon(UbicacionDeHisto));
+        
+    }       
     
-    public static String createHistograma(String titulo, String[] valores) {
+    public static String createHistograma(String titulo, ArrayList<Object> valores) {
         String x;
         idIMG = idIMG + 1;
         x = String.valueOf(idIMG);
@@ -34,8 +41,8 @@ public class Histograma {
         nombreIMG = "histograma" + x + ".jpg";
         
         Map<String, Integer> contador = new HashMap<>();
-        for (String elemento : valores) {
-            contador.put(elemento, contador.getOrDefault(elemento, 0) + 1);
+        for (Object elemento : valores) {
+            contador.put((String) elemento, contador.getOrDefault(elemento, 0) + 1);
         }
 
         // Crear un conjunto de datos para el histograma

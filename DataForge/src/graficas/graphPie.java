@@ -1,5 +1,6 @@
 package graficas;
 
+import static dataforge.Editor.img;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import static test.analizadores.Parser.atributospie;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 public class graphPie {
     public static String nombreIMGPie;
@@ -22,6 +24,8 @@ public class graphPie {
         // Crear el gráfico de pastel
         String UbicacionDelPie = createPieChart(elementos, datos, tituloGrafica);
         System.out.println(UbicacionDelPie);
+        
+        img.add(new ImageIcon(UbicacionDelPie));
         
     }
 

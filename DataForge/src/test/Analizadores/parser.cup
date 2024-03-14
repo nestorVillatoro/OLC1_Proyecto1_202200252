@@ -7,8 +7,13 @@ import java.util.ArrayList;
 import graficas.graphPie;
 import graficas.graphLine;
 import graficas.Histograma;
+import graficas.graphBar;
 import Graficas.objetopie;
 import Graficas.objetoline;
+import Graficas.objetobar;
+import java.util.HashMap;
+
+
 
 import Graficas.objetohisto;
 
@@ -21,7 +26,12 @@ parser code
     public ArrayList <Object> elemY = new ArrayList<>();
     public static ArrayList <objetopie> atributospie = new ArrayList<>();
     public static ArrayList <objetoline> atributoslinea = new ArrayList<>();
+    public static ArrayList <objetobar> atributosbar = new ArrayList<>();
     public static ArrayList <objetohisto> atributoshisto = new ArrayList<>();
+    public static ArrayList<Object> elementos_arreglo = new ArrayList<>();
+    public static HashMap <String, ArrayList<Object>> brrrr = new HashMap<>();
+
+
 
     variables hashVariables = new variables();
 
@@ -37,16 +47,16 @@ parser code
 }
 
 
-:}
+:} 
 
-terminal String CHAR, DOUBLE, VAR, END, IGUALDAD, ARR, ARROBA, CORCHETEIZ, EJEX, EJEY, TITULOX, TITULOY, GRAPHBAR;
+terminal String CHAR, DOUBLE, VAR, END, IGUALDAD, ARR, ARROBA, CORCHETEIZ, EJEX, EJEY, TITULOX, TITULOY, GRAPHBAR, IGUALDAD2;
 terminal String CORCHETEDE, SUM, RES, MUL, DIV, MOD, PARENTESISIZ, PARENTESISDE, COMA, GRAPHLINE, HISTOGRAMA;
 terminal String MEDIA, MEDIANA, MODA, VARIANZA, MAX, MIN, CONSOLE, PRINT, COLUMN, IGUAL, PUNTOCOMA, DOSPUNTOS;
 terminal String DECIMAL, CARACTERES, CHARCOMILLAS, PROGRAM, ENDPROGRAM, GRAPHPIE, LABEL, VALUES, TITULO, EXEC;
 
-non terminal declararVariable, declararDouble, declararChar, inicializarPrograma, codigo, comandos, listaImprimir;
-non terminal declararArreglos, listaArreglosDouble, listaArreglosChar, declararGraficaHistograma, todo, declararGraficaBar;
-non terminal declararAritmetica, declararEstadisticas, declararPrint, declararGraficaPie, declararGraficaLine;
+non terminal declararVariable, declararDouble, declararChar, inicializarPrograma, codigo, comandos, listaImprimir, elemArrayChar, opsArreglos;
+non terminal declararArreglos, listaArreglosDouble, listaArreglosChar, declararGraficaHistograma, todo, declararGraficaBar, imprimirArreglos;
+non terminal declararAritmetica, declararEstadisticas, declararPrint, declararGraficaPie, declararGraficaLine, elemArrayDouble, stats;
 
 inicializarPrograma ::= PROGRAM codigo ENDPROGRAM;
 
@@ -61,7 +71,8 @@ comandos ::= declararVariable
             | declararGraficaPie
             | declararGraficaHistograma
             | declararGraficaBar
-            | declararGraficaLine;
+            | declararGraficaLine
+            | imprimirArreglos;
 
 
 
@@ -103,8 +114,33 @@ todo ::= CHARCOMILLAS:texto {: RESULT = ((String) texto.substring(1, texto.lengt
 
 
 
-declararArreglos ::= ARR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS ARROBA CARACTERES IGUALDAD CORCHETEIZ listaArreglosDouble CORCHETEDE END PUNTOCOMA
-                    | ARR DOSPUNTOS CHAR DOSPUNTOS DOSPUNTOS ARROBA CARACTERES IGUALDAD CORCHETEIZ listaArreglosChar CORCHETEDE END PUNTOCOMA;
+declararArreglos ::= ARR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS ARROBA CARACTERES: arreglo IGUALDAD CORCHETEIZ elemArrayDouble: elementos CORCHETEDE END PUNTOCOMA {: RESULT = elementos_arreglo;
+                                        ArrayList<Object> nuevosElementos = new ArrayList<>(elementos_arreglo);
+                                        brrrr.put(arreglo, nuevosElementos); 
+                                        elementos_arreglo.clear();
+                                        :}
+                    | ARR DOSPUNTOS CHAR DOSPUNTOS DOSPUNTOS ARROBA CARACTERES: arreglo IGUALDAD CORCHETEIZ elemArrayChar: elementos CORCHETEDE END PUNTOCOMA {: RESULT = elementos_arreglo;
+                                        System.out.println("IMPRIMIENDO EL NOMBRE DEL ARREGLO EN LA PRODUCCION PRINCIPAL: "+arreglo);
+                                        ArrayList<Object> nuevosElementos = new ArrayList<>(elementos_arreglo);
+                                        brrrr.put(arreglo, nuevosElementos); 
+                                        elementos_arreglo.clear();
+                                        :};
+
+elemArrayDouble ::= elemArrayDouble COMA declararDouble: elemento_double {: elementos_arreglo.add((Double) elemento_double); 
+                                            RESULT = elementos_arreglo;
+:}
+                                           | declararDouble: elemento_double {: elementos_arreglo.add((Double) elemento_double);  
+                                            RESULT = elementos_arreglo;
+:};
+
+elemArrayChar ::= elemArrayChar COMA declararChar: elemento_char {: elementos_arreglo.add( (String) elemento_char); 
+                                            RESULT = elementos_arreglo;
+:}
+                                        | declararChar: elemento_char {: elementos_arreglo.add( (String) elemento_char); 
+                                        RESULT = elementos_arreglo;
+:};
+
+
 
 listaArreglosDouble ::= listaArreglosDouble COMA declararDouble: elementosDouble {:elemY.add((Double) elementosDouble); RESULT = elemY; :} 
                     | declararDouble: elementosDouble {:elemY.add((Double) elementosDouble); RESULT = elemY; :}  ;
@@ -117,37 +153,45 @@ listaArreglosChar ::= listaArreglosChar COMA declararChar: elementosChar {:elemX
 
 declararAritmetica ::= VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES:name IGUALDAD SUM PARENTESISIZ declararDouble:x COMA declararDouble:y PARENTESISDE END PUNTOCOMA {:
  RESULT = ((Double) x) + ((Double) y); 
+hashVariables.setVariable(name, RESULT);
 :}
                     | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES:name IGUALDAD RES PARENTESISIZ declararDouble:x COMA declararDouble:y PARENTESISDE END PUNTOCOMA {:
  RESULT = ((Double) x) - ((Double) y); 
+hashVariables.setVariable(name, RESULT);
 :}
                     | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES:name IGUALDAD MUL PARENTESISIZ declararDouble:x COMA declararDouble:y PARENTESISDE END PUNTOCOMA {:
  RESULT = ((Double) x) * ((Double) y); 
+hashVariables.setVariable(name, RESULT);
 :}
                     | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES:name IGUALDAD DIV PARENTESISIZ declararDouble:x COMA declararDouble:y PARENTESISDE END PUNTOCOMA {:
-  RESULT = ((Double) x) / ((Double) y);                    
+  RESULT = ((Double) x) / ((Double) y); 
+hashVariables.setVariable(name, RESULT);                   
 :}
                     | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES:name IGUALDAD MOD PARENTESISIZ declararDouble:x COMA declararDouble:y PARENTESISDE END PUNTOCOMA {:
  RESULT = ((Double) x) % ((Double) y); 
+hashVariables.setVariable(name, RESULT);
 :};
 
 
 
 
-declararEstadisticas ::= VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD MEDIA PARENTESISIZ CORCHETEIZ listaArreglosDouble CORCHETEDE PARENTESISDE END PUNTOCOMA
-                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD MEDIANA PARENTESISIZ CORCHETEIZ listaArreglosDouble CORCHETEDE PARENTESISDE END PUNTOCOMA
-                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD MODA PARENTESISIZ CORCHETEIZ listaArreglosDouble CORCHETEDE PARENTESISDE END PUNTOCOMA
-                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD VARIANZA PARENTESISIZ CORCHETEIZ listaArreglosDouble CORCHETEDE PARENTESISDE END PUNTOCOMA
-                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD MAX PARENTESISIZ CORCHETEIZ listaArreglosDouble CORCHETEDE PARENTESISDE END PUNTOCOMA
-                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES IGUALDAD MIN PARENTESISIZ CORCHETEIZ listaArreglosDouble CORCHETEDE PARENTESISDE END PUNTOCOMA;
+
 
 declararGraficaBar ::= GRAPHBAR PARENTESISIZ 
-TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS END PUNTOCOMA
-EJEX DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar CORCHETEDE END PUNTOCOMA
-EJEY DOSPUNTOS DOSPUNTOS DOUBLE IGUAL CORCHETEIZ listaArreglosDouble CORCHETEDE END PUNTOCOMA
-TITULOX DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS END PUNTOCOMA
-TITULOY DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS END PUNTOCOMA
-EXEC GRAPHBAR END PUNTOCOMA
+TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: titulo END PUNTOCOMA {:RESULT = titulo;:}
+EJEX DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar: elementosX CORCHETEDE END PUNTOCOMA {: RESULT = elementosX;:}
+EJEY DOSPUNTOS DOSPUNTOS DOUBLE IGUAL CORCHETEIZ listaArreglosDouble: elementosY CORCHETEDE END PUNTOCOMA {: RESULT = elementosY;:}
+TITULOX DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: tituloX END PUNTOCOMA {: RESULT = tituloX;:}
+TITULOY DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: tituloY END PUNTOCOMA {: RESULT = tituloY;:}
+EXEC GRAPHBAR END PUNTOCOMA {:
+    objetobar barras = new objetobar((String) titulo, (String) tituloX, (String) tituloY, (ArrayList<Object>) elementosX, (ArrayList<Object>) elementosY);
+    atributosbar.add(barras);
+    graphBar generar = new graphBar();
+    generar.generarGrafica();
+    elemX.clear();
+    elemY.clear();
+    atributosbar.clear();
+:}
 PARENTESISDE END PUNTOCOMA;
 
 declararGraficaPie ::= GRAPHPIE PARENTESISIZ 
@@ -163,7 +207,22 @@ EXEC GRAPHPIE END PUNTOCOMA {:
         elemY.clear();
         atributospie.clear();
 :}
-PARENTESISDE END PUNTOCOMA;
+PARENTESISDE END PUNTOCOMA
+
+    | GRAPHPIE PARENTESISIZ  
+    VALUES DOSPUNTOS DOSPUNTOS DOUBLE IGUAL CORCHETEIZ listaArreglosDouble:valores CORCHETEDE END PUNTOCOMA {: RESULT = valores; :}
+    LABEL DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar:elementos CORCHETEDE END PUNTOCOMA {: RESULT = elementos; :}
+    TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: titulo END PUNTOCOMA {: RESULT = titulo; :}
+    EXEC GRAPHPIE END PUNTOCOMA {:
+            objetopie pie = new objetopie((String) titulo, (ArrayList<Object>) elementos, (ArrayList<Object>) valores);
+            atributospie.add(pie);
+            graphPie generar = new graphPie();
+            generar.generarGrafica();
+            elemX.clear();
+            elemY.clear();
+            atributospie.clear();
+    :}
+    PARENTESISDE END PUNTOCOMA;
 
 declararGraficaLine ::= GRAPHLINE PARENTESISIZ
 TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: titulo END PUNTOCOMA {:RESULT = titulo;:}
@@ -183,8 +242,36 @@ EXEC GRAPHLINE END PUNTOCOMA {:
 PARENTESISDE END PUNTOCOMA;
 
 declararGraficaHistograma ::= HISTOGRAMA PARENTESISIZ 
-TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS END PUNTOCOMA
-VALUES DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar CORCHETEDE END PUNTOCOMA 
-EXEC HISTOGRAMA END PUNTOCOMA
+TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: titulo END PUNTOCOMA {:RESULT = titulo;:}
+VALUES DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar: elementos CORCHETEDE END PUNTOCOMA {: RESULT = elementos;:}
+EXEC HISTOGRAMA END PUNTOCOMA {:
+    objetohisto histo = new objetohisto((String) titulo, (ArrayList<Object>) elementos);
+    atributoshisto.add(histo);
+    Histograma generar = new Histograma();
+    generar.generarGrafica();
+    elemX.clear();
+    elemY.clear();
+    atributoshisto.clear();
+:}
 PARENTESISDE END PUNTOCOMA;
                    
+
+
+
+
+imprimirArreglos ::= CONSOLE DOSPUNTOS DOSPUNTOS COLUMN IGUAL declararChar: titulo IGUALDAD2 ARROBA opsArreglos: name END PUNTOCOMA {: 
+                            ArrayList <Object> arregloLista = brrrr.get(name);
+
+                            STR.append("-------------------\n");
+                            STR.append(titulo+"\n");
+                            STR.append("-------------------\n");
+                            
+                           for (Object elemento : arregloLista){
+                                        STR.append(elemento.toString());
+                                        STR.append("\n");
+                            }
+
+                :}
+;
+
+opsArreglos ::= CARACTERES: nombreArreglo {: RESULT = nombreArreglo; :};
