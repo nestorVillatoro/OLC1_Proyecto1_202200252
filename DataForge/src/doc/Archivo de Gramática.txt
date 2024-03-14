@@ -1,0 +1,77 @@
+Archivo de Gramática
+
+<inicializarPrograma> ::= PROGRAM <codigo> ENDPROGRAM;
+
+<codigo> ::= <comandos>
+            | <codigo> <comandos>;
+
+<comandos> ::= <declararVariable>
+            | <declararArreglos>
+            | <declararAritmetica>
+            | <declararEstadisticas>
+            | <declararPrint>
+            | <declararGraficaPie>
+            | <declararGraficaHistograma>
+            | <declararGraficaBar>
+            | <declararGraficaLine>
+            | <imprimirArreglos>;
+
+<declararVariable> ::= VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES <nombre_variable> IGUALDAD <declararDouble> END PUNTOCOMA
+                       | VAR DOSPUNTOS CHAR DOSPUNTOS DOSPUNTOS CARACTERES <nombre_variable> IGUALDAD <declararChar> END PUNTOCOMA;
+
+<declararDouble> ::= DECIMAL <numero_decimal>
+                    | CARACTERES <nombre_variable>;
+
+<declararChar> ::= CARACTERES <nombre_variable>
+                  | CHARCOMILLAS <texto>;
+
+<declararPrint> ::= CONSOLE DOSPUNTOS DOSPUNTOS PRINT IGUAL <listaImprimir> END PUNTOCOMA;
+
+<listaImprimir> ::= <todo>
+                  | <listaImprimir> COMA <todo>;
+
+<todo> ::= CHARCOMILLAS <texto>
+          | CARACTERES <nombre_variable>
+          | DECIMAL <numero_decimal>;
+
+<declararArreglos> ::= ARR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS ARROBA CARACTERES <nombre_arreglo> IGUALDAD CORCHETEIZ <elemArrayDouble> CORCHETEDE END PUNTOCOMA
+                      | ARR DOSPUNTOS CHAR DOSPUNTOS DOSPUNTOS ARROBA CARACTERES <nombre_arreglo> IGUALDAD CORCHETEIZ <elemArrayChar> CORCHETEDE END PUNTOCOMA;
+
+<elemArrayDouble> ::= <declararDouble>
+                     | <elemArrayDouble> COMA <declararDouble>;
+
+<elemArrayChar> ::= <declararChar>
+                   | <elemArrayChar> COMA <declararChar>;
+
+<declararAritmetica> ::= VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES <nombre_variable> IGUALDAD SUM PARENTESISIZ <declararDouble> COMA <declararDouble> PARENTESISDE END PUNTOCOMA
+                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES <nombre_variable> IGUALDAD RES PARENTESISIZ <declararDouble> COMA <declararDouble> PARENTESISDE END PUNTOCOMA
+                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES <nombre_variable> IGUALDAD MUL PARENTESISIZ <declararDouble> COMA <declararDouble> PARENTESISDE END PUNTOCOMA
+                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES <nombre_variable> IGUALDAD DIV PARENTESISIZ <declararDouble> COMA <declararDouble> PARENTESISDE END PUNTOCOMA
+                        | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES <nombre_variable> IGUALDAD MOD PARENTESISIZ <declararDouble> COMA <declararDouble> PARENTESISDE END PUNTOCOMA;
+
+<declararGraficaBar> ::= GRAPHBAR PARENTESISIZ TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS <titulo> END PUNTOCOMA
+                          EJEX DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ <listaArreglosChar> CORCHETEDE END PUNTOCOMA
+                          EJEY DOSPUNTOS DOSPUNTOS DOUBLE IGUAL CORCHETEIZ <listaArreglosDouble> CORCHETEDE END PUNTOCOMA
+                          TITULOX DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS <tituloX> END PUNTOCOMA
+                          TITULOY DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS <tituloY> END PUNTOCOMA
+                          EXEC GRAPHBAR END PUNTOCOMA;
+
+<declararGraficaPie> ::= GRAPHPIE PARENTESISIZ LABEL DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ <listaArreglosChar> CORCHETEDE END PUNTOCOMA
+                          VALUES DOSPUNTOS DOSPUNTOS DOUBLE IGUAL CORCHETEIZ <listaArreglosDouble> CORCHETEDE END PUNTOCOMA
+                          TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS <titulo> END PUNTOCOMA
+                          EXEC GRAPHPIE END PUNTOCOMA;
+
+<declararGraficaLine> ::= GRAPHLINE PARENTESISIZ TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS <titulo> END PUNTOCOMA
+                           EJEX DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ <listaArreglosChar> CORCHETEDE END PUNTOCOMA
+                           EJEY DOSPUNTOS DOSPUNTOS DOUBLE IGUAL CORCHETEIZ <listaArreglosDouble> CORCHETEDE END PUNTOCOMA
+                           TITULOX DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS <tituloX> END PUNTOCOMA
+                           TITULOY DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS <tituloY> END PUNTOCOMA
+                           EXEC GRAPHLINE END PUNTOCOMA;
+
+<declararGraficaHistograma> ::= HISTOGRAMA PARENTESISIZ TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS <titulo> END PUNTOCOMA
+                                 VALUES DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ <listaArreglosChar> CORCHETEDE END PUNTOCOMA
+                                 EXEC HISTOGRAMA END PUNTOCOMA;
+
+<imprimirArreglos> ::= CONSOLE DOSPUNTOS DOSPUNTOS COLUMN IGUAL declararChar <titulo> IGUALDAD2 ARROBA <opsArreglos> END PUNTOCOMA;
+
+<opsArreglos> ::= CARACTERES <nombre_arreglo>;
