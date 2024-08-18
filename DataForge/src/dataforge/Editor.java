@@ -78,7 +78,7 @@ public class Editor extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("PROGRAM\n\nEND PROGRAM");
+        jTextArea1.setText("{\n\n\n}");
         jScrollPane1.setViewportView(jTextArea1);
 
         jTextArea2.setEditable(false);

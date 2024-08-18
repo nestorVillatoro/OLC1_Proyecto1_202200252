@@ -2,20 +2,7 @@ package test.analizadores;
 import Errores.Error_;
 import dataforge.Editor;
 import java_cup.runtime.*;
-import hashMap.variables;
 import java.util.ArrayList;
-import graficas.graphPie;
-import graficas.graphLine;
-import graficas.Histograma;
-import graficas.graphBar;
-import Graficas.objetopie;
-import Graficas.objetoline;
-import Graficas.objetobar;
-import java.util.HashMap;
-
-
-
-import Graficas.objetohisto;
 
 
 parser code 
@@ -24,16 +11,12 @@ parser code
     public ArrayList <String> elementosParaImprimir = new ArrayList <String>();
     public ArrayList <Object> elemX = new ArrayList<>();
     public ArrayList <Object> elemY = new ArrayList<>();
-    public static ArrayList <objetopie> atributospie = new ArrayList<>();
-    public static ArrayList <objetoline> atributoslinea = new ArrayList<>();
-    public static ArrayList <objetobar> atributosbar = new ArrayList<>();
-    public static ArrayList <objetohisto> atributoshisto = new ArrayList<>();
     public static ArrayList<Object> elementos_arreglo = new ArrayList<>();
-    public static HashMap <String, ArrayList<Object>> brrrr = new HashMap<>();
 
 
 
-    variables hashVariables = new variables();
+
+
 
     public void syntax_error(Symbol s){
         //System.out.println("Error sintáctico: "+s.value+" linea: "+s.left+" columna: "+s.right);
@@ -41,237 +24,45 @@ parser code
         Editor.lista_errores.add(miError);
 }
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
-       // System.out.println("Error sintáctico unrecovered: "+s.value+" linea: "+s.left+" columna: "+s.right);
-        Error_ miError = new Error_(s.left,s.right,s.value.toString(),false);
-        Editor.lista_errores.add(miError);    
+       System.out.println("Error sintáctico unrecovered: "+s.value+" linea: "+s.left+" columna: "+s.right);   
 }
 
 
 :} 
 
-terminal String CHAR, DOUBLE, VAR, END, IGUALDAD, ARR, ARROBA, CORCHETEIZ, EJEX, EJEY, TITULOX, TITULOY, GRAPHBAR, IGUALDAD2;
-terminal String CORCHETEDE, SUM, RES, MUL, DIV, MOD, PARENTESISIZ, PARENTESISDE, COMA, GRAPHLINE, HISTOGRAMA;
-terminal String MEDIA, MEDIANA, MODA, VARIANZA, MAX, MIN, CONSOLE, PRINT, COLUMN, IGUAL, PUNTOCOMA, DOSPUNTOS;
-terminal String DECIMAL, CARACTERES, CHARCOMILLAS, PROGRAM, ENDPROGRAM, GRAPHPIE, LABEL, VALUES, TITULO, EXEC;
+terminal String LLAVEIZ, LLAVEDE, OPERA, CONJ, EVALUAR, DOSPUNTOS, IGUALDAD, DIFERENCIA, UNION, INTERSECCION, COMPLEMENTO;
+terminal String PARENTESISIZ, PARENTESISDE, COMA, PUNTOCOMA, CARACTERES, CARACTERUNICO, HASTA;
 
-non terminal declararVariable, declararDouble, declararChar, inicializarPrograma, codigo, comandos, listaImprimir, elemArrayChar, opsArreglos;
-non terminal declararArreglos, listaArreglosDouble, listaArreglosChar, declararGraficaHistograma, todo, declararGraficaBar, imprimirArreglos;
-non terminal declararAritmetica, declararEstadisticas, declararPrint, declararGraficaPie, declararGraficaLine, elemArrayDouble, stats;
+non terminal inicializarPrograma, codigo, comandos, crearConj, listaCaracteres, evaluarConj, operarConj;
+non terminal listaOperaciones, listaConjuntos, operaciones;
 
-inicializarPrograma ::= PROGRAM codigo ENDPROGRAM;
+inicializarPrograma ::= LLAVEIZ codigo LLAVEDE;
 
 codigo ::= comandos
         | codigo comandos;
 
-comandos ::= declararVariable
-            | declararArreglos
-            | declararAritmetica
-            | declararEstadisticas
-            | declararPrint
-            | declararGraficaPie
-            | declararGraficaHistograma
-            | declararGraficaBar
-            | declararGraficaLine
-            | imprimirArreglos;
-
-
-
-
-
-declararVariable ::= VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES:name IGUALDAD declararDouble:contenido END PUNTOCOMA {:hashVariables.setVariable(name, contenido);:}
-                    | VAR DOSPUNTOS CHAR DOSPUNTOS DOSPUNTOS CARACTERES:name IGUALDAD declararChar:contenido END PUNTOCOMA {:hashVariables.setVariable(name, contenido);:};
-
-declararDouble ::= DECIMAL:x {:RESULT = Double.parseDouble(x);:}
-                    | CARACTERES:var {:RESULT = hashVariables.getVariable(var);:};
-
-declararChar ::= CARACTERES:var {:RESULT = hashVariables.getVariable(var);:}
-                   | CHARCOMILLAS:texto {:RESULT = ((String) texto);:};
-
-declararPrint ::= CONSOLE DOSPUNTOS DOSPUNTOS PRINT IGUAL listaImprimir:cadenas END PUNTOCOMA {:
-
-STR.append("\n");
-for (String elemento : elementosParaImprimir){
-    STR.append(elemento.toString());
-    STR.append(", ");
-}
-if (!elementosParaImprimir.isEmpty()){
-    STR.setLength(STR.length() - 2);
-}
-                                    
-elementosParaImprimir.clear();
-:};
-
-
-listaImprimir ::= listaImprimir COMA todo:a {: elementosParaImprimir.add(a.toString()); :}
-                | todo:a {: elementosParaImprimir.add(a.toString() ); :};
-
-
-
-todo ::= CHARCOMILLAS:texto {: RESULT = ((String) texto.substring(1, texto.length () - 1)); :}
-                    | CARACTERES: variable {: RESULT = hashVariables.getVariable(variable); :} 
-                    | DECIMAL: num {: RESULT = Double.parseDouble(num); :};
-
-
-
-
-declararArreglos ::= ARR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS ARROBA CARACTERES: arreglo IGUALDAD CORCHETEIZ elemArrayDouble: elementos CORCHETEDE END PUNTOCOMA {: RESULT = elementos_arreglo;
-                                        ArrayList<Object> nuevosElementos = new ArrayList<>(elementos_arreglo);
-                                        brrrr.put(arreglo, nuevosElementos); 
-                                        elementos_arreglo.clear();
-                                        :}
-                    | ARR DOSPUNTOS CHAR DOSPUNTOS DOSPUNTOS ARROBA CARACTERES: arreglo IGUALDAD CORCHETEIZ elemArrayChar: elementos CORCHETEDE END PUNTOCOMA {: RESULT = elementos_arreglo;
-                                        System.out.println("IMPRIMIENDO EL NOMBRE DEL ARREGLO EN LA PRODUCCION PRINCIPAL: "+arreglo);
-                                        ArrayList<Object> nuevosElementos = new ArrayList<>(elementos_arreglo);
-                                        brrrr.put(arreglo, nuevosElementos); 
-                                        elementos_arreglo.clear();
-                                        :};
-
-elemArrayDouble ::= elemArrayDouble COMA declararDouble: elemento_double {: elementos_arreglo.add((Double) elemento_double); 
-                                            RESULT = elementos_arreglo;
-:}
-                                           | declararDouble: elemento_double {: elementos_arreglo.add((Double) elemento_double);  
-                                            RESULT = elementos_arreglo;
-:};
-
-elemArrayChar ::= elemArrayChar COMA declararChar: elemento_char {: elementos_arreglo.add( (String) elemento_char); 
-                                            RESULT = elementos_arreglo;
-:}
-                                        | declararChar: elemento_char {: elementos_arreglo.add( (String) elemento_char); 
-                                        RESULT = elementos_arreglo;
-:};
-
-
-
-listaArreglosDouble ::= listaArreglosDouble COMA declararDouble: elementosDouble {:elemY.add((Double) elementosDouble); RESULT = elemY; :} 
-                    | declararDouble: elementosDouble {:elemY.add((Double) elementosDouble); RESULT = elemY; :}  ;
-
-listaArreglosChar ::= listaArreglosChar COMA declararChar: elementosChar {:elemX.add( (String) elementosChar); RESULT = elemX;:}
-                    | declararChar: elementosChar {:elemX.add( (String) elementosChar); RESULT = elemX;:};
-
-
-
-
-declararAritmetica ::= VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES:name IGUALDAD SUM PARENTESISIZ declararDouble:x COMA declararDouble:y PARENTESISDE END PUNTOCOMA {:
- RESULT = ((Double) x) + ((Double) y); 
-hashVariables.setVariable(name, RESULT);
-:}
-                    | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES:name IGUALDAD RES PARENTESISIZ declararDouble:x COMA declararDouble:y PARENTESISDE END PUNTOCOMA {:
- RESULT = ((Double) x) - ((Double) y); 
-hashVariables.setVariable(name, RESULT);
-:}
-                    | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES:name IGUALDAD MUL PARENTESISIZ declararDouble:x COMA declararDouble:y PARENTESISDE END PUNTOCOMA {:
- RESULT = ((Double) x) * ((Double) y); 
-hashVariables.setVariable(name, RESULT);
-:}
-                    | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES:name IGUALDAD DIV PARENTESISIZ declararDouble:x COMA declararDouble:y PARENTESISDE END PUNTOCOMA {:
-  RESULT = ((Double) x) / ((Double) y); 
-hashVariables.setVariable(name, RESULT);                   
-:}
-                    | VAR DOSPUNTOS DOUBLE DOSPUNTOS DOSPUNTOS CARACTERES:name IGUALDAD MOD PARENTESISIZ declararDouble:x COMA declararDouble:y PARENTESISDE END PUNTOCOMA {:
- RESULT = ((Double) x) % ((Double) y); 
-hashVariables.setVariable(name, RESULT);
-:};
-
-
-
-
-
-
-declararGraficaBar ::= GRAPHBAR PARENTESISIZ 
-TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: titulo END PUNTOCOMA {:RESULT = titulo;:}
-EJEX DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar: elementosX CORCHETEDE END PUNTOCOMA {: RESULT = elementosX;:}
-EJEY DOSPUNTOS DOSPUNTOS DOUBLE IGUAL CORCHETEIZ listaArreglosDouble: elementosY CORCHETEDE END PUNTOCOMA {: RESULT = elementosY;:}
-TITULOX DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: tituloX END PUNTOCOMA {: RESULT = tituloX;:}
-TITULOY DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: tituloY END PUNTOCOMA {: RESULT = tituloY;:}
-EXEC GRAPHBAR END PUNTOCOMA {:
-    objetobar barras = new objetobar((String) titulo, (String) tituloX, (String) tituloY, (ArrayList<Object>) elementosX, (ArrayList<Object>) elementosY);
-    atributosbar.add(barras);
-    graphBar generar = new graphBar();
-    generar.generarGrafica();
-    elemX.clear();
-    elemY.clear();
-    atributosbar.clear();
-:}
-PARENTESISDE END PUNTOCOMA;
-
-declararGraficaPie ::= GRAPHPIE PARENTESISIZ 
-LABEL DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar:elementos CORCHETEDE END PUNTOCOMA {: RESULT = elementos; :}
-VALUES DOSPUNTOS DOSPUNTOS DOUBLE IGUAL CORCHETEIZ listaArreglosDouble:valores CORCHETEDE END PUNTOCOMA {: RESULT = valores; :}
-TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: titulo END PUNTOCOMA {: RESULT = titulo; :}
-EXEC GRAPHPIE END PUNTOCOMA {:
-        objetopie pie = new objetopie((String) titulo, (ArrayList<Object>) elementos, (ArrayList<Object>) valores);
-        atributospie.add(pie);
-        graphPie generar = new graphPie();
-        generar.generarGrafica();
-        elemX.clear();
-        elemY.clear();
-        atributospie.clear();
-:}
-PARENTESISDE END PUNTOCOMA
-
-    | GRAPHPIE PARENTESISIZ  
-    VALUES DOSPUNTOS DOSPUNTOS DOUBLE IGUAL CORCHETEIZ listaArreglosDouble:valores CORCHETEDE END PUNTOCOMA {: RESULT = valores; :}
-    LABEL DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar:elementos CORCHETEDE END PUNTOCOMA {: RESULT = elementos; :}
-    TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: titulo END PUNTOCOMA {: RESULT = titulo; :}
-    EXEC GRAPHPIE END PUNTOCOMA {:
-            objetopie pie = new objetopie((String) titulo, (ArrayList<Object>) elementos, (ArrayList<Object>) valores);
-            atributospie.add(pie);
-            graphPie generar = new graphPie();
-            generar.generarGrafica();
-            elemX.clear();
-            elemY.clear();
-            atributospie.clear();
-    :}
-    PARENTESISDE END PUNTOCOMA;
-
-declararGraficaLine ::= GRAPHLINE PARENTESISIZ
-TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: titulo END PUNTOCOMA {:RESULT = titulo;:}
-EJEX DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar: elementosX CORCHETEDE END PUNTOCOMA {: RESULT = elementosX;:}
-EJEY DOSPUNTOS DOSPUNTOS DOUBLE IGUAL CORCHETEIZ listaArreglosDouble: elementosY CORCHETEDE END PUNTOCOMA {: RESULT = elementosY;:}
-TITULOX DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: tituloX END PUNTOCOMA {: RESULT = tituloX;:}
-TITULOY DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: tituloY END PUNTOCOMA {: RESULT = tituloY;:}
-EXEC GRAPHLINE END PUNTOCOMA {:
-    objetoline linea = new objetoline((String) titulo, (String) tituloX, (String) tituloY, (ArrayList<Object>) elementosX, (ArrayList<Object>) elementosY);
-    atributoslinea.add(linea);
-    graphLine generar = new graphLine();
-    generar.generarGrafica();
-    elemX.clear();
-    elemY.clear();
-    atributoslinea.clear();
-:}
-PARENTESISDE END PUNTOCOMA;
-
-declararGraficaHistograma ::= HISTOGRAMA PARENTESISIZ 
-TITULO DOSPUNTOS DOSPUNTOS CHAR IGUAL CHARCOMILLAS: titulo END PUNTOCOMA {:RESULT = titulo;:}
-VALUES DOSPUNTOS DOSPUNTOS CHAR IGUAL CORCHETEIZ listaArreglosChar: elementos CORCHETEDE END PUNTOCOMA {: RESULT = elementos;:}
-EXEC HISTOGRAMA END PUNTOCOMA {:
-    objetohisto histo = new objetohisto((String) titulo, (ArrayList<Object>) elementos);
-    atributoshisto.add(histo);
-    Histograma generar = new Histograma();
-    generar.generarGrafica();
-    elemX.clear();
-    elemY.clear();
-    atributoshisto.clear();
-:}
-PARENTESISDE END PUNTOCOMA;
-                   
-
-
-
-
-imprimirArreglos ::= CONSOLE DOSPUNTOS DOSPUNTOS COLUMN IGUAL declararChar: titulo IGUALDAD2 ARROBA opsArreglos: name END PUNTOCOMA {: 
-                            ArrayList <Object> arregloLista = brrrr.get(name);
-
-                            STR.append("-------------------\n");
-                            STR.append(titulo+"\n");
-                            STR.append("-------------------\n");
-                            
-                           for (Object elemento : arregloLista){
-                                        STR.append(elemento.toString());
-                                        STR.append("\n");
-                            }
-
-                :}
+comandos ::= crearConj
+        |    operarConj
+        |    evaluarConj
 ;
 
-opsArreglos ::= CARACTERES: nombreArreglo {: RESULT = nombreArreglo; :};
+crearConj ::= CONJ DOSPUNTOS CARACTERES:name IGUALDAD listaCaracteres:lista PUNTOCOMA;
+
+operarConj ::= OPERA DOSPUNTOS CARACTERES:nameVarOpera IGUALDAD listaOperaciones listaConjuntos PUNTOCOMA;
+
+evaluarConj ::= EVALUAR PARENTESISIZ LLAVEIZ listaCaracteres:lista LLAVEDE COMA CARACTERES:name PARENTESISDE PUNTOCOMA;
+
+listaConjuntos ::= listaConjuntos LLAVEIZ CARACTERES:nameVarConj LLAVEDE
+                | LLAVEIZ CARACTERES:nameVarConj LLAVEDE;
+
+listaCaracteres ::= listaCaracteres COMA CARACTERUNICO
+                | CARACTERUNICO 
+                | CARACTERUNICO HASTA CARACTERUNICO;
+
+listaOperaciones ::= listaOperaciones operaciones 
+                | operaciones;
+
+operaciones ::= DIFERENCIA
+            | UNION
+            | INTERSECCION
+            | COMPLEMENTO;
